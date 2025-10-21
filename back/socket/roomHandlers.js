@@ -1,5 +1,4 @@
 
-
 const handleCreateRoom = (io, socket, activeRooms) => {
     const roomId = Math.random().toString(36).substring(2, 6).toUpperCase();
 

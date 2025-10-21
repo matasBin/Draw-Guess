@@ -1,5 +1,18 @@
+
+---TODO---
 Animation when player gets the correct guess
 Animation when the player guesses wrong
 Clear guess input when clicks guess btn
 Fix flickering when clicking create room
-Live chat function when player guesses it appears in the chat
+Live chat function when player guesses wrong ones appears in the chat
+Add @media queries for phone
+
+
+---Future plans---
+Add a login and register option
+registered user tracks correct guesses
+can add friends
+invite friends from friend list with a toast (toastify)
+customizable username
+Add difficulty levels for more interesting words >:)
+Deploy/Host on a server

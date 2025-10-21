@@ -1,7 +1,9 @@
 const WORDS = [
     'cat', 'dog', 'house', 'tree', 'car', 'sun', 'moon', 'star', 'fish', 'bird',
     'pizza', 'hamburger', 'computer', 'phone', 'guitar', 'piano', 'book', 'clock',
-    'airplane', 'bicycle', 'flower', 'mountain', 'ocean', 'rainbow', 'bridge', 'castle'
+    'airplane', 'bicycle', 'flower', 'mountain', 'ocean', 'rainbow', 'bridge', 'castle',
+    'void', 'space', 'air', 'ring', 'king', 'nerve', 'antique', 'javascript', 'react',
+    'reaction', 'fatigue', 'bmw', 'audi'
 ];
 
 const handleStartGame = (io, socket, activeRooms) => {
