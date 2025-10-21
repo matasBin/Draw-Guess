@@ -1,0 +1,5 @@
+Animation when player gets the correct guess
+Animation when the player guesses wrong
+Clear guess input when clicks guess btn
+Fix flickering when clicking create room
+Live chat function when player guesses it appears in the chat

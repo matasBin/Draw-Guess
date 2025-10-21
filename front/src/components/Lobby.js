@@ -81,7 +81,7 @@ const Lobby = ({onGameStart}) => {
                     ease="power3.out"
                     stagger={0.03}
                     threshold={0.1}
-                    triggerOnce={true}
+                    triggerOnce={false}
                     triggerOnHover={true}
                     respectReducedMotion={true}
                 />
