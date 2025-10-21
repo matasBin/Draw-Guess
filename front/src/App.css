@@ -1,16 +1,263 @@
-.canvas {
-    border: 1px solid black;
-    touch-action: none;
-    display: block;
+/* --- Google Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* --- Global Styles & Variables --- */
+:root {
+    --primary-color: #64B5F6; /* A lighter, softer blue for dark themes */
+    --secondary-color: #FFD54F; /* A warm, friendly yellow */
+    --success-color: #81C784; /* A pleasant green */
+    --error-color: #E57373; /* A softer red */
+    --background-color: #121212; /* A classic dark background */
+    --surface-color: #1E1E1E; /* For cards and the canvas */
+    --text-color: #E0E0E0; /* A light gray for text */
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.4);
+    --paper-color: #c2bcbc;
 }
 
+body {
+    margin: 0;
+    font-family: 'Press Start 2P', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+/* --- Main App Layout --- */
 .App {
+    text-align: center;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Removed the polka-dot background for a cleaner dark look */
+}
+
+/* --- Typography --- */
+h1, h2 {
+    font-family: 'Press Start 2P', sans-serif;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+
+/* --- Reusable Components --- */
+.btn {
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: var(--primary-color);
+    color: var(--background-color); /* Dark text on light button */
+    border: none;
+    border-radius: 25px;
+    padding: 12px 25px;
+    margin: 10px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: var(--background-color);
+}
+
+.btn-error {
+    background-color: var(--error-color);
+    color: var(--background-color);
+}
+
+.text-input {
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 1.2rem;
+    padding: 12px 20px;
+    border: 2px solid var(--primary-color);
+    border-radius: 25px;
+    outline: none;
+    text-align: center;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    transition: border-color 0.2s ease;
+}
+
+.text-input:focus {
+    border-color: var(--secondary-color);
+}
+
+.error-message {
+    color: var(--error-color);
+    font-weight: 700;
+    margin-top: 10px;
+    animation: shake 0.5s;
+}
+
+/* --- Lobby Component --- */
+.Lobby {
+    background: var(--surface-color);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    max-width: 400px;
+}
+
+.Lobby h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+
+.Lobby > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Lobby .divider {
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 1.5rem;
+    margin: 15px 0;
+    color: #999;
+}
+
+/* --- Canvas Component --- */
+.Canvas {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.Canvas-header {
+    width: 100%;
+    max-width: 900px; /* Give it a bit more max-width */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* --- Guess Section Layout --- */
+.Canvas-guess-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-grow: 1; /* Allows this section to take up available space */
+    justify-content: center;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+/* Make the guess H2 smaller to prevent squishing */
+.Canvas-guess-section h2 {
+    font-size: 1.5rem; /* Smaller than the default h2 */
+    font-weight: 400; /* A bit lighter */
+    white-space: nowrap; /* Prevents the underscores from wrapping */
+    margin: 0;
+    flex-shrink: 0; /* Prevents this h2 from shrinking if space is tight */
+}
+
+/* Make the guess input smaller */
+.guess-input {
+    font-size: 0.9rem !important; /* Smaller font size */
+    padding: 8px 12px !important; /* Smaller padding */
+    width: 150px !important; /* Smaller fixed width */
+    flex-shrink: 0; /* Prevents the input from shrinking */
+}
+
+/* Make the guess button smaller */
+.Canvas-guess-section .btn {
+    font-size: 0.9rem !important; /* Smaller font size */
+    padding: 8px 15px !important; /* Smaller padding */
+    flex-shrink: 0; /* Prevents the button from shrinking */
+}
+
+/* --- Drawing Tools --- */
+.Canvas-drawing-tools {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
-.Canvas {
-    border: 1px solid black;
+.Canvas-drawing-tools select,
+.Canvas-drawing-tools input[type="color"] {
+    padding: 8px;
+    border-radius: 10px;
+    border: 2px solid var(--primary-color);
+    cursor: pointer;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+}
 
+.Canvas-drawing-tools input[type="color"] {
+    padding: 0;
+}
 
+/* --- ShuffleText Component --- */
+.shuffle-parent {
+    display: inline-block;
+    white-space: normal;
+    word-wrap: break-word;
+    will-change: transform;
+    line-height: 1; /* keep line height consistent before/after split to avoid jump */
+    font-size: 4rem;
+    font-family: 'Press Start 2P', sans-serif;
+    text-transform: uppercase;
+    visibility: hidden; /* hidden until initialized to avoid flash/jump */
+}
+
+.shuffle-parent.is-ready {
+    visibility: visible;
+}
+
+.shuffle-char-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: baseline;
+    position: relative;
+}
+
+.shuffle-char-wrapper > span {
+    display: inline-flex;
+    will-change: transform;
+}
+
+.shuffle-char {
+    line-height: 1;
+    display: inline-block;
+    text-align: center;
+}
+
+.konva-stage {
+    border: 5px solid var(--primary-color);
+    border-radius: 15px;
+    background-color: var(--paper-color); /* Use the surface color here */
+    box-shadow: var(--shadow);
+}
+
+/* --- Animations --- */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
 }

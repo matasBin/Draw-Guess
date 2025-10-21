@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {socket} from "../socket";
+import Shuffle from "./ShuffleText";
+import "./Shuffle.css"
 
 const Lobby = ({onGameStart}) => {
 
@@ -70,21 +72,34 @@ const Lobby = ({onGameStart}) => {
 
     return (
         <div className={"Lobby"}>
-            <h1>Draw & Guess</h1>
+                <Shuffle
+                    text="Draw & Guess"
+                    shuffleDirection="right"
+                    duration={1}
+                    animationMode="evenodd"
+                    shuffleTimes={1}
+                    ease="power3.out"
+                    stagger={0.03}
+                    threshold={0.1}
+                    triggerOnce={true}
+                    triggerOnHover={true}
+                    respectReducedMotion={true}
+                />
 
             {status === 'idle' && (
                 <div>
-                    <button onClick={handleCreateRoom}>Create a Room</button>
-                    <div>OR</div>
+                    <button className={"btn"} onClick={handleCreateRoom}>Create a Room</button>
+                    <div className={"divider"}>OR</div>
                     <input
+                        className={"text-input"}
                         type="text"
                         placeholder="Enter Room Code"
                         value={roomId}
                         onChange={(e) => setRoomId(e.target.value)}
                         maxLength={4}
                     />
-                    <button onClick={handleJoinRoom}>Join Room</button>
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    <button className={"btn btn-secondary"} onClick={handleJoinRoom}>Join Room</button>
+                    {error && <p className={"error-message"}>{error}</p>}
                 </div>
             )}
 
@@ -93,7 +108,7 @@ const Lobby = ({onGameStart}) => {
                     <h2>Room: {roomId}</h2>
                     <p>Players in room: {playerCount}/3</p>
                     {playerCount < 3 && <p>Waiting for more players...</p>}
-                    {playerCount <= 3 && <button onClick={handleStartGame}>Start Game</button>}
+                    {playerCount <= 3 && <button className={"btn btn-success"} onClick={handleStartGame}>Start Game</button>}
                 </div>
             )}
         </div>

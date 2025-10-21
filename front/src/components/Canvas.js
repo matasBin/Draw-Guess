@@ -118,21 +118,23 @@ const Canvas = ({gameData, onBackToLobby}) => {
 
     return (
         <div className={"Canvas"}>
-            <button onClick={onBackToLobby}>Leave Game</button>
-            {
-                role === 'drawer' ?
-                    <h2>You are drawing: {word}</h2>
-                    :
-                    <>
-                        <h2>{isCorrect ? `The Word was: ${word}` : `Guess the word: ${'_ '.repeat(wordLength)}`}</h2>
-                        <input type="text" placeholder={"Guess the word"} ref={guessInput}/>
-                        <button disabled={isCorrect} onClick={handleGuess}>Guess</button>
-                    </>
+            <div className="Canvas-header">
+                <button className={"btn btn-error"} onClick={onBackToLobby}>Leave Game</button>
+                {
+                    role === 'drawer' ?
+                        <h2>You are drawing: {word}</h2>
+                        :
+                        <>
+                            <h2>{isCorrect ? `The Word was: ${word}` : `Guess the word: ${'_ '.repeat(wordLength)}`}</h2>
+                            <input className={"text-input"} type="text" placeholder={"Guess the word"} ref={guessInput}/>
+                            <button className={"btn btn-success"} disabled={isCorrect} onClick={handleGuess}>Guess</button>
+                        </>
 
-            }
+                }
+            </div>
             {
                 role === 'drawer' &&
-                <>
+                <div className={"Canvas-drawing-tools"}>
                     <select value={tool}
                             onChange={(e) => {
                                 setTool(e.target.value);
@@ -146,19 +148,21 @@ const Canvas = ({gameData, onBackToLobby}) => {
                         <option value={10}>10</option>
                         <option value={20}>20</option>
                     </select>
-                </>
+                    <button className={"btn"} onClick={handleUndo}>Undo</button>
+                </div>
             }
-            <button onClick={handleUndo}>Undo</button>
-            <Stage width={600}
-                   height={window.innerHeight}
-                   onMouseDown={handleMouseDown}
-                   onMouseMove={handleMouseMove}
-                   onMouseUp={handleMouseUp}
-                   onTouchStart={handleMouseDown}
-                   onTouchMove={handleMouseMove}
-                   onTouchEnd={handleMouseUp}>
+
+            <Stage
+                className={"konva-stage"}
+                width={600}
+                height={window.innerHeight - 200}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onTouchStart={handleMouseDown}
+                onTouchMove={handleMouseMove}
+                onTouchEnd={handleMouseUp}>
                 <Layer>
-                    <Text text={"Just start drawing"} x={5} y={30}/>
                     {
                         lines.map((line, index) => (
                             <Line
