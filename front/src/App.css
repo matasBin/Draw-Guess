@@ -1,0 +1,16 @@
+.canvas {
+    border: 1px solid black;
+    touch-action: none;
+    display: block;
+}
+
+.App {
+    display: flex;
+    justify-content: center;
+}
+
+.Canvas {
+    border: 1px solid black;
+
+
+}
